@@ -4,3 +4,5 @@ chromedriver
 *.html
 *.json
 *.log
+
+!/flaskapp/templates/*.html
