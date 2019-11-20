@@ -5,4 +5,5 @@ chromedriver
 *.json
 *.log
 
+# このフォルダのhtmlは除外しない
 !/flaskapp/templates/*.html
