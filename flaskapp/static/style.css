@@ -1,11 +1,30 @@
-body {
-    background: #d3d3d3;
+/* id属性の場合，#body{}, class属性の場合，.body{}とcssを指定する */
+#body {
+    background: white;
 }
 
-h1 {
+#h1 {
     color: black
 }
 
-p {
+#p {
     color: black;
+}
+
+#left-box {
+    display:inline-block;
+    width:40%;
+    /* text-align:left; */
+    /* float: left; */
+}
+
+#right-box {
+    display:inline-block;
+    width:60%;
+    float: right;
+    /* text-align:right; */
+}
+
+.payment_sum_table {
+    width: "200";
 }

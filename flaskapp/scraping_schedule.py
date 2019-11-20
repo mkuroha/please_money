@@ -6,6 +6,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import schedule
 
 from scraping.scraping_func import views_scraping_func, rakuten_scraping_func, aoyama_scraping_func, epos_scraping_func, mizuhobank_scraping_func
+from lib.push_line import push_line
 
 
 def job():
@@ -28,6 +29,12 @@ def job():
     print("mizuhobank")
     mizuhobank_thread = threading.Thread(target=mizuhobank_scraping_func)
     mizuhobank_thread.start()
+
+    # threadが終わるのを待つ
+    # TODO: 残高と支払額の差を計算し，ある値以上のときLINEに通知する
+    
+    # push_line("Please Money \n お金足りないよ")
+
 
 # test
 # schedule.every(10).minutes.do(job)

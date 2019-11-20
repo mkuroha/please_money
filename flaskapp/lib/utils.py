@@ -2,6 +2,7 @@ import json
 import datetime
 import copy
 from datetime import datetime as dt
+from dateutil.relativedelta import relativedelta
 
 
 def calc_bank_balance(alldata):
@@ -13,11 +14,12 @@ def calc_bank_balance(alldata):
     bank_balance: int型
     
     """
-    bank_balance = 37673‬
+    bank_balance = 37673
     
     for data in alldata:
         value = data[2]
         bank_balance += value
+    
     
     return bank_balance
 
@@ -125,7 +127,7 @@ def calc_payment_date(usedate, card_company, payment_type):
             return next_payment_day
         else:  # 分割払い
             for i in range(int(payment_type)):
-                next_payment_day = next_payment_day + datetime.timedelta(month=i)
+                next_payment_day = next_payment_day + relativedelta(months=i)
                 if (now - next_payment_day).days<-1 and (now - next_payment_day).days>-30 :
                     return conversion_holiday_to_weekday(conversion_day_to_four(next_payment_day))
             
@@ -177,17 +179,17 @@ def extract_close_payment(alldata):
     alloutput = []  # 全てのデータ
     near_output = []  # 支払日が先にあるもののみを格納
     for eachdata in alldata:
-        use_date = eachdata[0]
-        card_company = eachdata[1]
-        value = eachdata[2]
-        payment_type = eachdata[4]
-        output = [use_date, card_company, None, eachdata[3], payment_type]
+        use_date = eachdata[1]
+        card_company = eachdata[2]
+        value = eachdata[3]
+        payment_type = eachdata[5]
+        output = [use_date, card_company, None, eachdata[4], payment_type]
         
         # 分割払い算出
-        if payment_type=="1" or payment_type="ボ":  # 
-            output[2] = data[2]
+        if payment_type=="1" or payment_type=="ボ":  # 
+            output[2] = value
         else:  # 分割払いの場合
-            separated_value = separate_payment(value=value, count=int(payment_type), card_company=card_company)
+            separated_value = separate_payment(value=value, payment_type=int(payment_type), card_company=card_company)
             output[2] = separated_value
         
         # 支払日の算出

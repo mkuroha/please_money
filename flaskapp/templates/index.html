@@ -5,23 +5,67 @@
 <h1>Please Money</h1>
 <hr>
 
-<!-- <h3>Hello</h3> -->
-<p>銀行残高</p>
-<p>{{bank}}</p>
+<div id="box">
+    <div id="left-box">
+        
+        <h3>みずほ銀行残高</h3>
+        <p> {{today}} 現在 &emsp; <b>{{bank_balance}} 円</b> </p>
+        
+        
+        <br>
+        <h3>支払い情報</h3>
+        <table class=payment_sum_table width="50%">
+            <tr>
+                <th>支払日</th>
+                <th>金額</th>
+            </tr>
+            {% for sum in sum_list %}
+            <tr>
+                <td align="center">
+                    {{ sum[0] }}
+                </td>
+                <td align="right">
+                    <b>{{ sum[1] }}</b> 円
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>
+                      
+                </td>
+                <td align="right">
+                    <b>{{ all_sum }}</b> 円
+                </td>
+            </tr>
+           
+        </table>
+        
+    </div>
+    
+    <!-- 各カード会社の明細 -->
+    <div align="left" id="right-box">
+        <p>みずほ銀行残高 現在</p>
+        <p>{{bank_balance}} </p>
+        
+        <p>Views Card</p>
+        <p>{{views}}</p>
 
-<p>Views Card</p>
-<p>{{views}}</p>
+        <p>ボーナス一括</p>
+        <p>{{bonus}}</p>
 
-<p>ボーナス一括</p>
-<p>{{bonus}}</p>
+        <p>Rakuten Card</p>
+        <p>{{rakuten}}</p>
 
-<p>Rakuten Card</p>
-<p>{{rakuten}}</p>
+        <p>Aoyama Card</p>
+        <p>{{aoyama}}</p>
 
-<p>Aoyama Card</p>
-<p>{{aoyama}}</p>
+        <p>Epos Card</p>
+        <p>{{epos}}</p>
+    
+    </div>
+    
+</div>
 
-<p>Epos Card</p>
-<p>{{epos}}</p>
+
 
 {% endblock %}
