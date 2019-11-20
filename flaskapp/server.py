@@ -35,6 +35,9 @@ def index():
     alldata, neardata = extract_close_payment(payment)
     
     
+    # TODO: ページの設計
+    
+    
     # with open("json/views_contents.json", "r") as fr:
     #     views_contents = json.load(fr)
     # views_payment_sum, views_bonus_value = calc_payment_sum(views_contents, "views")
