@@ -354,8 +354,8 @@ def epos_selenium():
             # このページをスクレイピング
             html = driver.page_source
         except:
-            import traceback
-            traceback.print_exc()
+            # import traceback
+            # traceback.print_exc()
             
             driver.quit()
             continue

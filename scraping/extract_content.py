@@ -15,52 +15,14 @@ from bs4 import BeautifulSoup
 支払日は，各会社で使用日から算出してリストに追加する
 """
 
-def calc_payment_date(tmp_list):
-    """
-    カード会社ごとに支払日の計算をする関数
-    
-    Paramters
-    ---------
-    tmp_list: list型 [使用日（datetime），カード会社（str），金額（int），使用用途（str），支払方法（str, "1", "2", ...）]
-    
-    Output
-    ------
-    output: list型
-    
-    """
-    output = copy.deepcopy(tmp_list)
-    tdate = output[0]
-    card_company = output[1]
-    payment_method = output[5]
-    
-    
-    if card_company=="Views":
-        return output
-        
-    elif card_company=="Rakuten":
-        return output
-        
-    elif card_company=="EPOS":
-        return output
-        
-    elif card_company=="Aoyama":
-        return output
-        
-    
-    else:
-        return output
-    
-
 def is_exists(cur, time, company_name, cost):
     # データベースにtime, costのものがあるかをTrue or Falseで返す関数
     # ある場合Trueになる
     cur.execute(
         "SELECT EXISTS (SELECT * FROM %s WHERE time=%s AND company_name=%s AND cost=%s )", (database, time, company_name, cost) 
         )
-    tmp = cur.fetchone()
-    # print(tmp)
-    
-    return tmp[0]
+            
+    return cur.fetchone()[0]
 
 
 def is_exists_for_bank(cur, date, value, content):
@@ -69,10 +31,8 @@ def is_exists_for_bank(cur, date, value, content):
     cur.execute(
         "SELECT EXISTS (SELECT * FROM bank WHERE date=%s AND value=%s AND usage=%s )", (date, value, content) 
         )
-    tmp = cur.fetchone()
     
-    
-    return tmp[0]
+    return cur.fetchone()[0]
 
 
 # 取得したHTMLから欲しい情報を取得し，データベースに保存する関数
@@ -117,10 +77,8 @@ def views_scraping(views_html):
                 
                 if is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
                     pass
-                    print('a')
                 else:  # データベース内にデータがない場合
                     # データベースに保存
-                    print("b")
                     cur.execute(
                         "INSERT INTO payment (time, company_name, cost, usage, payment_type) VALUES (%s, %s, %s, %s, %s)", (output_tmp[0], output_tmp[1], output_tmp[2], output_tmp[3], output_tmp[4])
                         )
@@ -139,9 +97,6 @@ def mizuhobank_scraping(mizuhobank_html):
     ------
     mizuhobank_html: みずほ銀行インターネットかんたん残高照会のHTML
     
-    Output
-    ------
-    
     """
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
@@ -158,7 +113,6 @@ def mizuhobank_scraping(mizuhobank_html):
             pass
         else:
             details = table.find_all("td")
-            # print(details)
             
             # 日付
             date = details[0].text
@@ -256,9 +210,7 @@ def epos_scraping(epos_html):
     
     Output
     ------
-    """
-    print("epos_scraping")
-    
+    """    
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -307,11 +259,8 @@ def aoyama_scraping(aoyama_html):
     """
     Input
     ------
-    aoyama_html
+    aoyama_html: htmlデータ
     
-    
-    Output
-    ------
     
     """
     # データベース接続
@@ -375,25 +324,3 @@ if __name__ == "__main__":
     #     views_html = fr.read()
     # aoyama_scraping(views_html)
     
-    # conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
-    # cur = conn.cursor()
-    
-    # # cur.execute("truncate bank;") # 初期化（テーブルは残す）
-    # # cur.execute("DROP TABLE bank;")  # テーブルを削除
-    
-    # # cur.execute("CREATE TABLE bank (id serial PRIMARY KEY, date timestamp, value integer, usage varchar)")
-    # # cur.execute("CREATE TABLE payment (id serial PRIMARY KEY, time timestamp, company_name varchar, cost integer, usage varchar, payment_type varchar)")
-    
-    # # for tag, info in student_dict.items():
-    # #     cur.execute("INSERT INTO takeda_database (tag, name, subject) VALUES (%s, %s, %s)", (tag, info["name"], info["subject"]))
-    
-    # # cur.execute("SELECT * FROM payment;")
-    # # test = cur.fetchall()
-    # conn.commit()
-    
-    # cur.close()
-    # conn.close()
-    
-    # with open("mizuhobank.html", "r", encoding="utf-8") as fr:
-    #     mizuho_html = fr.read()
-    # mizuhobank_scraping(mizuho_html)

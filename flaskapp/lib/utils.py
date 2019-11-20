@@ -54,6 +54,7 @@ def calc_payment_date(usedate, card_company, payment_type):
     day = usedate.day
     now = dt.now()
     
+    # 定数宣言，各カード会社の締め日と支払日
     VIEWS_PAYMENT_DATE = 4
     RAKUTEN_PAYMENT_DATE = 27
     AOYAMA_CLOSING_DATE = 5
