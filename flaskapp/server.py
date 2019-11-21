@@ -38,13 +38,19 @@ def index():
     
     # 支払日算出，分割払いの計算，直近の支払い情報の抽出
     alldata, neardata = extract_close_payment(payment)
+    views = []
+    rakuten = []
+    aoyama = []
+    epos = []
+    for eachdata in neardata:
+        pass
     
     
     # 和の計算
     # 直近の支払日の計算
     sum_list = [["2019/11/3", 1200], ["2019/11/4", 1500],  ["2019/11/5", 20000]]
     all_sum = 22700
-
+    
     return render_template(
         "index.html", 
         title="Please Money", 
