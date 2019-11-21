@@ -26,8 +26,8 @@
 table.payment_sum_table {
     border-collapse: collapse;
     border: 1;
+    margin-left:10px;
 }
-
 table.payment_sum_table th {
     border: 1px solid #222;
     border-bottom: 3px double black;

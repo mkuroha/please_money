@@ -35,6 +35,14 @@ def index():
     
     # 口座残高の計算
     bank_balance = calc_bank_balance(bank)
+    bank_list = []
+    for eachdata in bank:
+        tmp_list = []
+        for i in range(len(eachdata)):
+            tmp_list.append(eachdata[i])
+        
+        tmp_list[1] = tmp_list[1].strftime("%Y/%m/%d")
+        bank_list.append(tmp_list)
     
     # 支払日算出，分割払いの計算，直近の支払い情報の抽出
     alldata, neardata = extract_close_payment(payment)
@@ -43,7 +51,19 @@ def index():
     aoyama = []
     epos = []
     for eachdata in neardata:
-        pass
+        # print(eachdata)
+        eachdata[0] = eachdata[0].strftime("%Y/%m/%d")
+        
+        if eachdata[1]=="Views":
+            views.append(eachdata)
+        elif eachdata[1]=="Rakuten":
+            rakuten.append(eachdata)
+        elif eachdata[1]=="Aoyama":
+            aoyama.append(eachdata)
+        else:
+            epos.append(eachdata)
+    
+    # TODO: 同じ日付の合計を計算
     
     
     # 和の計算
@@ -58,12 +78,12 @@ def index():
         sum_list=sum_list,
         all_sum=all_sum,
         # payment_date_list=payment_date_list,
-        # views=views_payment_sum, 
-        # rakuten=rakuten_payment_sum,
-        # epos=epos_payment_sum,
-        # aoyama=aoyama_payment_sum,
+        view_list=views, 
+        rakuten_list=rakuten,
+        aoyama_list=aoyama,
+        epos_list=epos,
         bank_balance=bank_balance,
-        # bonus=views_bonus_value
+        bank_list=bank_list,
         )
     
 

@@ -84,7 +84,7 @@ def calc_payment_date(usedate, card_company, payment_type):
                 return conversion_holiday_to_weekday(dt(year+1, 1, VIEWS_PAYMENT_DATE))  # 1月
         else:  # 2, 3,..., 12回払い 
             for i in range(int(payment_type)):
-                next_payment_day = next_payment_day + datetime.timedelta(month=i)
+                next_payment_day = next_payment_day + relativedelta(months=1)
                 if (now - next_payment_day).days<-1 and (now - next_payment_day).days>-30 :
                     return conversion_holiday_to_weekday(conversion_day_to_four(next_payment_day))
             
@@ -101,7 +101,7 @@ def calc_payment_date(usedate, card_company, payment_type):
             return next_payment_day
         else:  # 分割払い
             for i in range(int(payment_type)):
-                next_payment_day = next_payment_day + datetime.timedelta(month=i)
+                next_payment_day = next_payment_day + relativedelta(months=1)
                 if (now - next_payment_day).days<-1 and (now - next_payment_day).days>-30 :
                     return conversion_holiday_to_weekday(conversion_day_to_four(next_payment_day))
             
@@ -127,7 +127,7 @@ def calc_payment_date(usedate, card_company, payment_type):
             return next_payment_day
         else:  # 分割払い
             for i in range(int(payment_type)):
-                next_payment_day = next_payment_day + relativedelta(months=i)
+                next_payment_day = next_payment_day + relativedelta(months=1)
                 if (now - next_payment_day).days<-1 and (now - next_payment_day).days>-30 :
                     return conversion_holiday_to_weekday(conversion_day_to_four(next_payment_day))
             
@@ -152,7 +152,7 @@ def calc_payment_date(usedate, card_company, payment_type):
             return next_payment_day
         else:  # 分割払い
             for i in range(int(payment_type)):
-                next_payment_day = next_payment_day + datetime.timedelta(month=i)
+                next_payment_day = next_payment_day + relativedelta(months=1)
                 if (now - next_payment_day).days<-1 and (now - next_payment_day).days>-30 :
                     return conversion_holiday_to_weekday(conversion_day_to_four(next_payment_day))
             
@@ -249,20 +249,18 @@ def separate_payment(value, payment_type, card_company):
     card_company: str
     """
     separate_value = value
-    if card_company=="views":
+    if card_company=="Views":
         return separate_value
-    elif card_company=="rakuten":
+    elif card_company=="Rakuten":
         fee_dict = {3:2.04, 5:3.4, 6:4.08, 10:6.8, 12:8.16, 15:10.2, 18:12.24, 20:13.6, 24:16.32, 30:20.4, 36:24.48}
         all_fee = value // 100 * fee_dict[payment_type]
         separate_value = int( (value+all_fee) / payment_type )
         return separate_value
-    elif card_company=="aoyama":
+    elif card_company=="Aoyama":
         fee_dict = {3:2.04, 5:3.4, 6:4.08, 10:6.8, 12:8.16, 15:10.2, 18:12.24, 20:13.6, 24:16.32}
         all_fee = value // 100 * fee_dict[payment_type]
         separate_value = int( (value+all_fee) / payment_type )
         return separate_value
-    # elif card_company=="epos":
-    #     return separate_value
     else:
         pass
     
