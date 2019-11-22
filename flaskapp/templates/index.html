@@ -13,6 +13,8 @@
             <p> {{today}} 現在 &emsp; <b>{{bank_balance}} 円</b> </p>
         </div>
         
+        <br>
+        
         <div class="payment_info">
             <h4>支払い情報</h4>
             <table class=payment_sum_table width="80%">
@@ -49,7 +51,7 @@
         <h3>クレカ・銀行の詳細情報</h3>
         
         <div id="views_details">
-            <h4>Viewカード</h4>
+            <h4 id="view_h4">Viewカード</h4>
             <table class=view_table border=1 width="95%">
                 <tr>
                     <th>利用日</th>
@@ -65,19 +67,21 @@
                     <td align="center" width="50%">
                         {{ eachdata[3] }}
                     </td>
-                    <td align="center" width="25%">
+                    <td align="center" width="20%">
                         <b>{{ eachdata[2] }}</b> 円
                     </td>
-                    <td align="center" width="10%">
+                    <td align="center" width="15%">
                         {{ eachdata[4] }}
                     </td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
+
+        <br>
         
         <div id="rakuten_details">
-            <h4>楽天カード</h4>
+            <h4 id="rakuten_h4">楽天カード</h4>
             <table class=rakuten_table border=1 width="95%">
                 <tr>
                     <th>利用日</th>
@@ -93,10 +97,10 @@
                     <td align="center" width="50%">
                         {{ eachdata[3] }}
                     </td>
-                    <td align="center" width="25%">
+                    <td align="center" width="20%">
                         <b>{{ eachdata[2] }}</b> 円
                     </td>
-                    <td align="center" width="10%">
+                    <td align="center" width="15%">
                         {{ eachdata[4] }}
                     </td>
                 </tr>
@@ -104,8 +108,10 @@
             </table>
         </div>
         
+        <br>
+        
         <div id="aoyama_details">
-            <h4>青山カード</h4>
+            <h4 id="aoyama_h4">青山カード</h4>
             <table class=aoyama_table border=1 width="95%">
                 <tr>
                     <th>利用日</th>
@@ -121,19 +127,21 @@
                     <td align="center" width="50%">
                         {{ eachdata[3] }}
                     </td>
-                    <td align="center" width="25%">
+                    <td align="center" width="20%">
                         <b>{{ eachdata[2] }}</b> 円
                     </td>
-                    <td align="center" width="10%">
+                    <td align="center" width="15%">
                         {{ eachdata[4] }}
                     </td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
+
+        <br>
         
         <div id="epos_details">
-            <h4>エポスカード</h4>
+            <h4 id="epos_h4">エポスカード</h4>
             <table class=epos_table border=1 width="95%">
                 <tr>
                     <th>利用日</th>
@@ -149,19 +157,21 @@
                     <td align="center" width="50%">
                         {{ eachdata[3] }}
                     </td>
-                    <td align="center" width="25%">
+                    <td align="center" width="20%">
                         <b>{{ eachdata[2] }}</b> 円
                     </td>
-                    <td align="center" width="10%">
+                    <td align="center" width="15%">
                         {{ eachdata[4] }}
                     </td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
+
+        <br>
         
         <div id="mizuhobank_details">
-            <h4>みずほ銀行 振込・引き落とし情報</h4>
+            <h4 id="mizuho_h4"> みずほ銀行 振込・引き落とし情報</h4>
             <table class=mizuhobank_table border=1 width="95%">
                 <tr>
                     <th>日付</th>

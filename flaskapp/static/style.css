@@ -1,32 +1,29 @@
 /* id属性の場合，#body{}, class属性の場合，.body{}とcssを指定する */
 #body {
     background: white;
+    width: 100%;
 }
 
 /* 左側 */
 #left-box {
-    display:inline-block;
-    width:40%;
-    /* text-align:left; */
-    /* float: left; */
+    display: inline-block;
+    width: 40%;
 }
 .mizuho_bank_balance {
     background: #f5f5f5;
-    width: 90%;
-    /* background: #c0c0c0; */
+    width: 95%;
 }
-
 
 .payment_info {
     background: #f5f5f5;
-    width: 90%;
+    width: 95%;
     /* background: #c0c0c0; */
 }
 /* 支払い情報TABLE */
 table.payment_sum_table {
     border-collapse: collapse;
     border: 1;
-    margin-left:10px;
+    margin: 10px 10px;
 }
 table.payment_sum_table th {
     border: 1px solid #222;
@@ -55,36 +52,67 @@ table.payment_sum_table td.sum {
 
 /* 右側 */
 #right-box {
-    display:inline-block;
-    width:60%;
+    display: inline-block;
+    width: 60%;
     float: right;
-    /* text-align:right; */
 }
 
 #views_details {
     background: #f5f5f5;
-    width: 90%;
+    width: 95%;
+}
+#view_h4 {
+    margin: 10px 10px;
+}
+table.view_table {
+    margin: 10px 10px;
 }
 
 #rakuten_details {
     background: #f5f5f5;
-    width: 90%;
+    width: 95%;
+}
+#rakuten_h4 {
+    margin: 10px 10px;
+}
+table.rakuten_table {
+    margin: 10px 10px;
 }
 
 #aoyama_details {
     background: #f5f5f5;
-    width: 90%;
+    width: 95%;
+}
+#aoyama_h4 {
+    margin: 10px 10px;
+}
+table.aoyama_table {
+    margin: 10px 10px;
 }
 
 #epos_details {
     background: #f5f5f5;
-    width: 90%;
+    width: 95%;
+}
+#epos_h4 {
+    margin: 10px 10px;
+}
+table.epos_table {
+    margin: 10px 10px;
 }
 
 #mizuhobank_details {
     background: #f5f5f5;
-    width: 90%;
+    width: 95%;
+    margin: 10px 0px;
 }
+#mizuho_h4 {
+    margin: 10px 10px;
+}
+table.mizuhobank_table {
+    margin: 10px 10px;
+}
+
 
 /* 右側 終了 */
 
