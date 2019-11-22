@@ -46,13 +46,17 @@ def index():
     
     # 支払日算出，分割払いの計算，直近の支払い情報の抽出
     alldata, neardata = extract_close_payment(payment)
+    
     views = []
     rakuten = []
     aoyama = []
     epos = []
+    date_list = []
     for eachdata in neardata:
-        # print(eachdata)
         eachdata[0] = eachdata[0].strftime("%Y/%m/%d")
+        eachdata[5] = eachdata[5].strftime("%Y/%m/%d")
+        if not (eachdata[5] in date_list):
+            date_list.append(eachdata[5])
         
         if eachdata[1]=="Views":
             views.append(eachdata)
@@ -63,21 +67,27 @@ def index():
         else:
             epos.append(eachdata)
     
-    # TODO: 同じ日付の合計を計算
+    # 同じ日付の合計を計算
+    payment_sum_list_by_date = [0 for _ in range(len(date_list))]  # 支払日ごとの金額の合計を格納するためのもの
+    for eachdata in neardata:
+        # 全ての日付をfor文で回し，一致したものについて金額を足す
+        for i in range(len(date_list)):
+            if date_list[i]==eachdata[5]:
+                payment_sum_list_by_date[i] += eachdata[2]
     
+    # 日付と支払額の合計のtupleを作成する
+    payment_date_and_value = list( zip(date_list, payment_sum_list_by_date) )
     
     # 和の計算
-    # 直近の支払日の計算
-    sum_list = [["2019/11/3", 1200], ["2019/11/4", 1500],  ["2019/11/5", 20000]]
-    all_sum = 22700
+    all_sum = sum(payment_sum_list_by_date)
+    
     
     return render_template(
         "index.html", 
         title="Please Money", 
         today=now_date_str,
-        sum_list=sum_list,
+        sum_list=payment_date_and_value,
         all_sum=all_sum,
-        # payment_date_list=payment_date_list,
         view_list=views, 
         rakuten_list=rakuten,
         aoyama_list=aoyama,

@@ -249,22 +249,21 @@ def separate_payment(value, payment_type, card_company):
     card_company: str
     """
     separate_value = value
+    fee_dict = {3:2.04, 5:3.4, 6:4.08, 10:6.8, 12:8.16, 15:10.2, 18:12.24, 20:13.6, 24:16.32, 30:20.4, 36:24.48}
+    
     if card_company=="Views":
         return separate_value
     elif card_company=="Rakuten":
-        fee_dict = {3:2.04, 5:3.4, 6:4.08, 10:6.8, 12:8.16, 15:10.2, 18:12.24, 20:13.6, 24:16.32, 30:20.4, 36:24.48}
         all_fee = value // 100 * fee_dict[payment_type]
         separate_value = int( (value+all_fee) / payment_type )
         return separate_value
     elif card_company=="Aoyama":
-        fee_dict = {3:2.04, 5:3.4, 6:4.08, 10:6.8, 12:8.16, 15:10.2, 18:12.24, 20:13.6, 24:16.32}
         all_fee = value // 100 * fee_dict[payment_type]
         separate_value = int( (value+all_fee) / payment_type )
         return separate_value
     else:
         pass
-    
+
 
 if __name__ == "__main__":
     pass
-    # calc_()
