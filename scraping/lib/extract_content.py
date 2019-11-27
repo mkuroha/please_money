@@ -7,7 +7,6 @@ import psycopg2
 
 from bs4 import BeautifulSoup
 
-
 """
 各クレジットカード会社のHTMLを受け取り，そこから利用明細をリストとして取得
 リストの中
@@ -15,7 +14,7 @@ from bs4 import BeautifulSoup
 支払日は，各会社で使用日から算出してリストに追加する
 """
 
-def is_exists(cur, time, company_name, cost):
+def _is_exists(cur, time, company_name, cost):
     # データベースにtime, costのものがあるかをTrue or Falseで返す関数
     # ある場合Trueになる
     cur.execute(
@@ -25,7 +24,7 @@ def is_exists(cur, time, company_name, cost):
     return cur.fetchone()[0]
 
 
-def is_exists_for_bank(cur, date, value, content):
+def _is_exists_for_bank(cur, date, value, content):
     # データベースにtime, costのものがあるかをTrue or Falseで返す関数
     # ある場合Trueになる
     cur.execute(
@@ -78,7 +77,7 @@ def views_scraping(views_html):
                 else:
                     pass
                 
-                if is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
+                if _is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
                     pass
                 else:  # データベース内にデータがない場合
                     # データベースに保存
@@ -142,7 +141,7 @@ def mizuhobank_scraping(mizuhobank_html):
             content = content.replace("\u3000", "")
             
             # データベースへの格納方法
-            if is_exists_for_bank(cur=cur, date=date, value=value, content=content):
+            if _is_exists_for_bank(cur=cur, date=date, value=value, content=content):
                 pass
             else:  # データベース内にデータがない場合
                 # データベースに保存
@@ -200,7 +199,7 @@ def rakuten_scraping(rakuten_html):
                 output_type = output_type.replace('\n', '').replace(" ", "")
                 output_tmp[4] = output_type.split("回")[0]
                 
-                if is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
+                if _is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
                     pass
                 else:  # データベース内にデータがない場合
                     # データベースに保存
@@ -255,7 +254,7 @@ def epos_scraping(epos_html):
                 output_tmp[4] = "1"
                 
                 # DB格納
-                if is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
+                if _is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
                     pass
                 else:  # データベース内にデータがない場合
                     # データベースに保存
@@ -320,7 +319,7 @@ def aoyama_scraping(aoyama_html):
             output_tmp[4] = output_type
             
             # DB格納
-            if is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
+            if _is_exists(cur=cur, time=output_tmp[0], company_name=output_tmp[1], cost=output_tmp[2]):
                 pass
             else:  # データベース内にデータがない場合
                 # データベースに保存

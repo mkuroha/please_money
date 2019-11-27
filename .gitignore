@@ -2,10 +2,12 @@ json
 chromedriver
 __pycache__
 
-
 *.html
 *.json
 *.log
 
 # このフォルダのhtmlは除外しない
 !/flaskapp/templates/*.html
+scraping/beautifulsoup_test.py
+scraping/scraping.py
+

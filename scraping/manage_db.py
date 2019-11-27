@@ -3,9 +3,8 @@ import psycopg2
 """
 How To Use
 $ python manage_db.py -f c
-$ python manage_db.py -f d payment
-$ python manage_db.py -f i bank
-
+$ python manage_db.py -f d -t payment
+$ python manage_db.py -f i -t bank
 """
 
 
