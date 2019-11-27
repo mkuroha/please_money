@@ -40,6 +40,7 @@ def job():
     for thread in thread_list:
         thread.join()
     
+    
     # 残高と支払額の差を計算し，ある値以上のときLINEに通知する
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -59,7 +60,7 @@ def job():
 
 
 def main():
-
+    
     schedule.every(1).minutes.do(job)
     
     

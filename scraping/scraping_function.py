@@ -8,27 +8,37 @@ extract_content.pyの関数から，使用情報のリストが渡されるた�
 """
 
 def views_scraping_func():
+    print("--------------------------views selenium--------------------------")
     views_html = views_selenium()
+    print("--------------------------views scraping--------------------------")
     views_scraping(views_html)
 
 
 def rakuten_scraping_func():
+    print("--------------------------rakuten selenium--------------------------")
     rakuten_html = rakuten_selenium()
+    print("--------------------------rakuten scraping--------------------------")
     rakuten_scraping(rakuten_html)
 
 
 def aoyama_scraping_func():
+    print("--------------------------aoyama selenium--------------------------")
     aoyama_html = aoyama_selenium()
+    print("--------------------------aoyama scraping--------------------------")
     aoyama_scraping(aoyama_html)
 
 
 def epos_scraping_func():
+    print("--------------------------epos selenium--------------------------")
     epos_html = epos_selenium()
+    print("--------------------------epos scraping--------------------------")
     epos_scraping(epos_html)
 
 
 def mizuhobank_scraping_func():
+    print("--------------------------mizuhobank selenium--------------------------")
     mizuhobank_html = mizuhobank_selenium()
+    print("--------------------------mizuhobank scraping--------------------------")
     mizuhobank_scraping(mizuhobank_html)
 
 

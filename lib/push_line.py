@@ -9,7 +9,7 @@ def push_line(message):
     LINE通知用関数
     filename: str型 LINEへの通知の際のメッセージ内容に書き込んだファイル名を入れている
     """
-    with open("../json/line.json", "r") as fr:
+    with open("./json/line.json", "r") as fr:
         info = json.load(fr)
     
     url = info["url"]  # LINE notify url
