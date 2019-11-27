@@ -35,21 +35,16 @@
 └── scraping
     ├── __init__.py
     ├── __pycache__
-    ├── beautifulsoup_test.py
     ├── chromedriver
     │   └── 78
     │       └── chromedriver.exe
-    ├── extract_content.py
-    ├── get_html.py
     ├── json
     │   └── login_info.json
     ├── lib
+    │   ├── extract_content.py
+    │   └── get_html.py
     ├── manage_db.py
-    ├── mizuhobank.html
-    ├── rakuten.html
-    ├── scraping.py
-    ├── scraping_func.py
-    └── views.html
+    └── scraping_function.py
 ```
 
 ## setup
