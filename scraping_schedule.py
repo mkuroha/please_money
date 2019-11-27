@@ -2,11 +2,14 @@ import time
 import threading
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+
 import schedule
 import psycopg2
 
-from scraping.scraping_func import views_scraping_func, rakuten_scraping_func, aoyama_scraping_func, epos_scraping_func, mizuhobank_scraping_func
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from scraping.scraping_function import views_scraping_func, rakuten_scraping_func, aoyama_scraping_func, epos_scraping_func, mizuhobank_scraping_func
 from lib.utils import calc_bank_balance, extract_close_payment
 from lib.push_line import push_line
 
@@ -56,6 +59,9 @@ def job():
 
 
 def main():
+
+    schedule.every(1).minutes.do(job)
+    
     
     # LINE通知
     schedule.every().day.at("16:59").do(line_notification)

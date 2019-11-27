@@ -3,6 +3,7 @@ import threading
 import json
 import os
 import sys
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import numpy as np
@@ -10,14 +11,12 @@ import psycopg2
 import datetime
 from datetime import datetime as dt
 from flask import Flask, render_template, redirect, request
-from joblib import Parallel, delayed  # マルチスレッド
 
-from scraping.scraping_func import views_scraping_func, rakuten_scraping_func, aoyama_scraping_func, epos_scraping_func, mizuhobank_scraping_func
 from lib.utils import calc_bank_balance, extract_close_payment
-
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
+
 
 # 所持金
 pocket_money = [0]
