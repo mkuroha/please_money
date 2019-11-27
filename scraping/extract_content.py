@@ -19,9 +19,9 @@ def is_exists(cur, time, company_name, cost):
     # データベースにtime, costのものがあるかをTrue or Falseで返す関数
     # ある場合Trueになる
     cur.execute(
-        "SELECT EXISTS (SELECT * FROM %s WHERE time=%s AND company_name=%s AND cost=%s )", (database, time, company_name, cost) 
+        "SELECT EXISTS (SELECT * FROM payment WHERE time=%s AND company_name=%s AND cost=%s )", (time, company_name, cost) 
         )
-            
+    
     return cur.fetchone()[0]
 
 
@@ -37,6 +37,9 @@ def is_exists_for_bank(cur, date, value, content):
 
 # 取得したHTMLから欲しい情報を取得し，データベースに保存する関数
 def views_scraping(views_html):
+    if views_html == []:
+        raise ValueError("views html is empty")
+    
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -79,12 +82,15 @@ def views_scraping(views_html):
                     pass
                 else:  # データベース内にデータがない場合
                     # データベースに保存
+                    print("add data: ", output_tmp)
                     cur.execute(
                         "INSERT INTO payment (time, company_name, cost, usage, payment_type) VALUES (%s, %s, %s, %s, %s)", (output_tmp[0], output_tmp[1], output_tmp[2], output_tmp[3], output_tmp[4])
                         )
         conn.commit()
         
     except:
+        import traceback
+        traceback.print_exc()
         print("No data")
     
     cur.close()
@@ -98,6 +104,9 @@ def mizuhobank_scraping(mizuhobank_html):
     mizuhobank_html: みずほ銀行インターネットかんたん残高照会のHTML
     
     """
+    if mizuhobank_html is None:
+        raise ValueError("mizuhobank html is None")
+    
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -132,7 +141,6 @@ def mizuhobank_scraping(mizuhobank_html):
             content = details[3].text
             content = content.replace("\u3000", "")
             
-            
             # データベースへの格納方法
             if is_exists_for_bank(cur=cur, date=date, value=value, content=content):
                 pass
@@ -148,6 +156,9 @@ def mizuhobank_scraping(mizuhobank_html):
 
 
 def rakuten_scraping(rakuten_html):
+    if rakuten_html == []:
+        raise ValueError("rakuten html is empty")
+        
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -198,7 +209,9 @@ def rakuten_scraping(rakuten_html):
                         )
         conn.commit()
         
-    except:
+    except: 
+        import traceback
+        traceback.print_exc()
         print("No data")
     
     cur.close()
@@ -210,7 +223,10 @@ def epos_scraping(epos_html):
     
     Output
     ------
-    """    
+    """
+    if epos_html is None:
+        raise ValueError("epos html is None")
+     
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -248,7 +264,9 @@ def epos_scraping(epos_html):
                         )       
         conn.commit()
         
-    except:
+    except: 
+        import traceback
+        traceback.print_exc()
         print("No data")
     
     cur.close()
@@ -261,8 +279,10 @@ def aoyama_scraping(aoyama_html):
     ------
     aoyama_html: htmlデータ
     
-    
     """
+    if aoyama_html is None:
+        raise ValueError("aoyama html is None")
+    
     # データベース接続
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
     cur = conn.cursor()
@@ -309,7 +329,9 @@ def aoyama_scraping(aoyama_html):
                         )
         conn.commit()
     
-    except:
+    except: 
+        import traceback
+        traceback.print_exc()
         print("No data")
     
     cur.close()

@@ -315,6 +315,7 @@ def epos_selenium():
     
     with open("json/login_info.json", "r") as fr:
         login_info = json.load(fr)
+    
     login_url = "https://www.eposcard.co.jp/memberservice/pc/login/login_preload.do"
     
     html = None

@@ -11,6 +11,10 @@ from lib.utils import calc_bank_balance, extract_close_payment
 from lib.push_line import push_line
 
 
+def line_notification():
+    push_line(message="Please Money System is Running!", picture=False)
+
+
 def job():
     views_thread = threading.Thread(target=views_scraping_func)
     views_thread.start()
@@ -26,7 +30,6 @@ def job():
     
     mizuhobank_thread = threading.Thread(target=mizuhobank_scraping_func)
     mizuhobank_thread.start()
-    
     
     # threadが終わるのを待つ
     thread_list = threading.enumerate()
@@ -52,13 +55,21 @@ def job():
         push_line("Please Money \n 銀行残高： {} 円，支払額： {} 円 で金額が不足しています，".format(bank_balance, all_sum))
 
 
-# 月曜日と水曜日と金曜日と日曜日にjobを実行
-schedule.every().monday.do(job)
-schedule.every().wednesday.do(job)
-schedule.every().friday.do(job)
-schedule.every().sunday.do(job)
+def main():
+    
+    # LINE通知
+    schedule.every().day.at("16:59").do(line_notification)
+    
+    # 月曜日と水曜日と金曜日と日曜日にjobを実行
+    schedule.every().monday.at("17:00").do(job)
+    schedule.every().wednesday.at("17:00").do(job)
+    schedule.every().friday.at("17:00").do(job)
+    schedule.every().sunday.at("17:00").do(job)
+    
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(50)
+if __name__ == "__main__":
+    main()

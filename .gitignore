@@ -1,5 +1,7 @@
 json
 chromedriver
+__pycache__
+
 
 *.html
 *.json

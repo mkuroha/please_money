@@ -7,12 +7,23 @@
 
 <div id="box">
     <div id="left-box">
-        <h3>残高・支払い情報まとめ</h3>
+        <h3>残高・所持金 / 支払い情報まとめ</h3>
         <div class="mizuho_bank_balance">
             <h4>みずほ銀行残高</h4>
             <p> {{today}} 現在 &emsp; <b>{{bank_balance}} 円</b> </p>
         </div>
-        
+        <div class="pocket_money">
+            <h4>所持金</h4>
+            <!-- 入力フォーム -->
+            <form action="/post" method="POST">
+                <p>財布の中 <input type="number" name="pocket_money" /> 円 &emsp; <input type="submit" value="入力" /></p>
+            </form>
+            <p> {{today}} 現在 &emsp; <b>{{pocket_money}} 円</b> </p>
+        </div>
+        <div class="sum_money">
+            <h4>合計</h4>
+            <p> {{today}} 現在 &emsp; <b>{{sum_money}} 円</b> </p>
+        </div>
         <br>
         
         <div class="payment_info">

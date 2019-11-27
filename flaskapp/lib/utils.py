@@ -4,6 +4,7 @@ import copy
 from datetime import datetime as dt
 from dateutil.relativedelta import relativedelta
 
+START_BANK_BALANCE = 84076
 
 def calc_bank_balance(alldata):
     """
@@ -14,12 +15,12 @@ def calc_bank_balance(alldata):
     bank_balance: int型
     
     """
-    bank_balance = 37673
+    bank_balance = START_BANK_BALANCE
     
     for data in alldata:
+        
         value = data[2]
         bank_balance += value
-    
     
     return bank_balance
 
