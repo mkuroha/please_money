@@ -56,8 +56,8 @@ if __name__ == "__main__":
         epilog='end', # 引数のヘルプの後で表示
         add_help=True, # -h/–help オプションの追加
     )
-    parser.add_argument("-f", 'function')
-    parser.add_argument("-t", 'table_name')
+    parser.add_argument('-f', '--function')
+    parser.add_argument('-t', '--table_name')
     args = parser.parse_args()
     
     if args.function=="c":
