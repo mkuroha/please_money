@@ -18,6 +18,10 @@ def line_notification():
     push_line(message="Please Money System is Running!", picture=False)
 
 
+def print_function():
+    print("running")
+
+
 def job():
     views_thread = threading.Thread(target=views_scraping_func)
     views_thread.start()
@@ -40,6 +44,8 @@ def job():
     for thread in thread_list:
         thread.join()
     
+    print("#########################################################################")
+    print("finish thread")
     
     # 残高と支払額の差を計算し，ある値以上のときLINEに通知する
     conn = psycopg2.connect("dbname=please_money host=localhost user=postgres password=kurochan0917")
@@ -61,11 +67,12 @@ def job():
 
 def main():
     
-    schedule.every(1).minutes.do(job)
+    # schedule.every().day.at("23:53").do(job)
     
+    # schedule.every(10).seconds.do(print_function)
     
     # LINE通知
-    schedule.every().day.at("16:59").do(line_notification)
+    schedule.every().day.at("17:10").do(line_notification)
     
     # 月曜日と水曜日と金曜日と日曜日にjobを実行
     schedule.every().monday.at("17:00").do(job)

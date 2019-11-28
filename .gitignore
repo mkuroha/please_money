@@ -36,7 +36,7 @@ pip-selfcheck.json
 *.log
 
 # このフォルダのhtmlは除外しない
-!/flaskapp/templates/*.html
+!/templates/*
 scraping/beautifulsoup_test.py
 scraping/scraping.py
 
