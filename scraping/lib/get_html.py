@@ -10,11 +10,13 @@ from selenium.webdriver.support import expected_conditions
 # 定数宣言
 REPEAT_NUM = 5  # セレニウムの起動 繰り返し回数
 CHROME_VERSION = "78"  # Chromeのバージョン管理
+SELENIUM_HEADLESS = False
 
 
 def views_selenium():
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
+    if SELENIUM_HEADLESS: 
+        options.add_argument('--headless')
     
     with open("json/login_info.json", "r") as fr:
         login_info = json.load(fr)
@@ -90,9 +92,10 @@ def views_selenium():
 
 def rakuten_selenium():
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    
-    with open("json/login_info.json", "r") as fr:
+    if SELENIUM_HEADLESS: 
+        options.add_argument('--headless')
+        
+    with open("./json/login_info.json", "r") as fr:
         login_info = json.load(fr)
     login_url = "https://www.rakuten-card.co.jp/e-navi/index.xhtml"
     
@@ -126,7 +129,8 @@ def rakuten_selenium():
             time.sleep(4)
             
             # ご利用明細画面
-            details_button = driver.find_element_by_xpath('//*[@id="js-prefix-title"]/div/a')
+            # TODO: 
+            details_button = driver.find_element_by_xpath('/html/body/div[4]/div/div[2]/div[2]/div[1]/div[1]/table[1]/tbody/tr[2]/th/div[3]/div/a')
             time.sleep(3)
             details_button.click()
             time.sleep(4)
@@ -160,7 +164,8 @@ def rakuten_selenium():
 
 def mizuhobank_selenium():
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
+    if SELENIUM_HEADLESS: 
+        options.add_argument('--headless')
     
     with open("json/login_info.json", "r") as fr:
         login_info = json.load(fr)
@@ -220,9 +225,10 @@ def mizuhobank_selenium():
 
 def aoyama_selenium():
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
+    if SELENIUM_HEADLESS: 
+        options.add_argument('--headless')
     
-    with open("json/login_info.json", "r") as fr:
+    with open("./json/login_info.json", "r") as fr:
         login_info = json.load(fr)
     login_url = "https://www3.lifecard.co.jp/WebDesk/www/login.html"
     
@@ -283,7 +289,6 @@ def aoyama_selenium():
             details_button = driver.find_element_by_xpath('//*[@id="goSeikySel1-2"]/img')
             details_button.click()
             time.sleep(4)
-
             
             # 請求予定の明細画面
             yotei_button = driver.find_element_by_xpath('//*[@id="goSeikyVie8"]/img')
@@ -311,7 +316,8 @@ def aoyama_selenium():
 
 def epos_selenium():
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
+    if SELENIUM_HEADLESS: 
+        options.add_argument('--headless')
     
     with open("json/login_info.json", "r") as fr:
         login_info = json.load(fr)
@@ -360,9 +366,6 @@ def epos_selenium():
             
             driver.quit()
             continue
-    
-    # with open("epos.html", "w", encoding="utf-8") as fw:
-    #     fw.write(html)
     
     # 終了
     driver.quit()
